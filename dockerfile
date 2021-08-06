@@ -5,8 +5,8 @@ COPY ${REQUIREMENTS} /tmp/
 RUN pip install --upgrade pip
 RUN pip install -r /tmp/${REQUIREMENTS}
 
-COPY ./app /usr/src/app
 WORKDIR /usr/src/app
+COPY ./app .
 
-COPY ./docker-entrypoint.sh /usr/src/app/dockerInit/
-ENTRYPOINT ["/usr/src/app/dockerInit/docker-entrypoint.sh"]
+COPY ./docker-entrypoint.sh .
+RUN chmod +x ./docker-entrypoint.sh

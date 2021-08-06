@@ -2,8 +2,8 @@
 
 echo "docker-entrypoint.sh executing ..."
 
-echo "Start RabbitMQ Session Listener"
-python3 ./server.py
+echo "Start Session-Service"
+python3 /usr/src/app/server.py
 
 echo ""
 echo "##################"
