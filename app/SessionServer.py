@@ -9,9 +9,9 @@ class SessionServer():
 
     def start_session(self, input, _id=None):
         _id = _id if _id else uuid.uuid4().hex
-
+        route = 'transformers'
         try:
-            SessionProducer.publisch_new_session({"id": _id, "input": input})
+            SessionProducer.publisch_new_session({"id": _id, "input": input}, routing_key=route)
         except Exception as e:
             logging.error(e)
             raise ServiceUnavailable(f'RabbitMQ Service not available! Reason: {str(e)}') from e
