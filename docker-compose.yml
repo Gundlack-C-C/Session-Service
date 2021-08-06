@@ -4,8 +4,22 @@ services:
   rabbitnq:
     image: rabbitmq:latest
     container_name: session-queue
-    ports: 
+    ports:
       - "5672:5672"
+  session-receiver:
+    build: "."
+    image: session-service:latest
+    container_name: session-receiver
+    depends_on: [rabbitnq, session-service]
+    working_dir: /usr/src/app
+    command: python3 ./receiver.py
+    volumes:
+      - ./app/.log/:/usr/src/app/.log
+    environment:
+      - RABBITMQ_SERVICE_IP=session-queue
+      - RABBITMQ_SERVICE_PORT=5672
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
   session-service:
     build: "."
     image: session-service:latest
