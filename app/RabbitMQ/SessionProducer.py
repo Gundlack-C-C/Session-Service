@@ -22,5 +22,5 @@ def publisch_new_session(input, routing_key):
     connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
     channel.queue_declare(queue=queue)
-    channel.basic_publish(exchange='', routing_key=routing_key, body=json.dumps(input))
+    channel.basic_publish(exchange=Configuration.EXCHANGE_NAME, routing_key=routing_key, body=json.dumps(input))
     connection.close()
