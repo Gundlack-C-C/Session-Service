@@ -18,6 +18,14 @@
             "request": "launch",
             "program": "${cwd}/app/server.py",
             "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/app"
+        },
+        {
+            "name": "Receiver",
+            "type": "python",
+            "request": "launch",
+            "program": "${cwd}/app/session-status-service-app.py",
+            "console": "integratedTerminal",
             "args": [
                 "--l",
                 "./.log/server_debug.log",
