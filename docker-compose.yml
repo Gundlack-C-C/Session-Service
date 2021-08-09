@@ -1,38 +1,57 @@
 version: "3.9"
 
 services:
-  rabbitnq:
+  rabbitmq:
     image: rabbitmq:latest
     container_name: session-queue
     ports:
       - "5672:5672"
-  session-receiver:
+    networks:
+      - backend
+  session-status-service:
     build: "."
-    image: session-service:latest
-    container_name: session-receiver
-    depends_on: [rabbitnq, session-service]
+    image: session-status-service:latest
+    container_name: session-status-service
+    depends_on: [rabbitmq, session-service]
     working_dir: /usr/src/app
-    command: python3 ./receiver.py
+    command: python3 ./session-status-service-app.py --production
     volumes:
       - ./app/.log/:/usr/src/app/.log
+      - ./.cred:/usr/src/app/.cred
     environment:
       - RABBITMQ_SERVICE_IP=session-queue
       - RABBITMQ_SERVICE_PORT=5672
       - RABBITMQ_USERNAME=guest
       - RABBITMQ_PASSWORD=guest
+      - RABBITMQ_ROUTING_KEY=status
+      - RABBITMQ_EXCHANGE_NAME=pupymed
+      - FIREBASE_CREDENTIALS=./.cred/pupymed-d7d68250c022.json
+    networks:
+      - backend
   session-service:
     build: "."
     image: session-service:latest
     container_name: session-service
     ports:
       - "5001:5001"
-    depends_on: [rabbitnq]
+    depends_on: [rabbitmq]
+    links:
+      - rabbitmq
+    networks:
+      - backend
     working_dir: /usr/src/app
-    command: python3 ./server.py
+    command: python3 ./server.py --production
     volumes:
       - ./app/.log/:/usr/src/app/.log
+      - ./.cred:/usr/src/app/.cred
     environment:
       - RABBITMQ_SERVICE_IP=session-queue
       - RABBITMQ_SERVICE_PORT=5672
       - RABBITMQ_USERNAME=guest
       - RABBITMQ_PASSWORD=guest
+      - RABBITMQ_ROUTING_KEY=status
+      - RABBITMQ_EXCHANGE_NAME=pupymed
+      - FIREBASE_CREDENTIALS=./.cred/pupymed-d7d68250c022.json
+
+networks:
+  backend:
