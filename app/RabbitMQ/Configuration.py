@@ -1,12 +1,14 @@
+import os
+
 EXCHANGE_NAME = "smartsearch"
 ROUTING = {
     'sklearn': {
-        'QUEUE_NAME':  "sklearn_queue_input"
+        'QUEUE_NAME':  os.getenv("QUEUE_SKLEARN_INPUT")
     },
     'transformers': {
-        'QUEUE_NAME':  "transformers_queue_input"
+        'QUEUE_NAME':  os.getenv("QUEUE_TRANSFORMERS_INPUT")
     },
     'status': {
-        'QUEUE_NAME':  "session-status"
+        'QUEUE_NAME': os.getenv("QUEUE_STATUS_INPUT")
     }
 }

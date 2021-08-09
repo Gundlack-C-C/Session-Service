@@ -3,3 +3,4 @@ flask-cors
 requests
 pika
 firebase-admin
+gunicorn
