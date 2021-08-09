@@ -28,8 +28,9 @@ def Commit_Session():
         raise BadRequest("Missing field: 'input'")
 
     input = data.get('input', None)
+    mode = data.get('target', 'sklearn')
 
-    session_id = server.start_session(input)
+    session_id = server.start_session(input, mode)
 
     return jsonify(session_id)
 
