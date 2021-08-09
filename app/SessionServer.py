@@ -9,7 +9,7 @@ class SessionServer():
 
     def start_session(self, input, _id=None):
         _id = _id if _id else uuid.uuid4().hex
-        route = 'transformers'
+        route = 'sklearn'
         try:
             SessionProducer.publisch_new_session({"id": _id, "input": input}, routing_key=route)
         except Exception as e:
