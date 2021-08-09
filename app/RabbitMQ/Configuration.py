@@ -1,6 +1,6 @@
 import os
 
-EXCHANGE_NAME = "smartsearch"
+EXCHANGE_NAME = os.getenv("RABBITMQ_EXCHANGE_NAME")
 ROUTING = {
     'sklearn': {
         'QUEUE_NAME':  os.getenv("QUEUE_SKLEARN_INPUT")
