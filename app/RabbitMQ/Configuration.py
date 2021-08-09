@@ -1,6 +1,6 @@
 EXCHANGE_NAME = "smartsearch"
 ROUTING = {
-    'sklear': {
+    'sklearn': {
         'QUEUE_NAME_INPUT':  "sklearn_queue_input"
     },
     'transformers': {

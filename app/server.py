@@ -13,7 +13,7 @@ logger = logging.getLogger("Session-Service.Server")
 app = Flask(__name__)
 CORS(app)
 
-server = None
+server = SessionServer()
 
 
 @app.route('/session', methods=['POST'])
@@ -61,8 +61,6 @@ if __name__ == '__main__':
     logging.info(f"Starting Server with [{args}]")
 
     try:
-        server = SessionServer()
-
         # Start Server
         app.run(host="0.0.0.0", debug=False, port=5001)
 
