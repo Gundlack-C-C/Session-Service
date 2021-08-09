@@ -14,7 +14,6 @@ services:
     container_name: session-status-service
     depends_on: [rabbitmq, session-service]
     working_dir: /usr/src/app
-    command: python3 ./session-status-service-app.py --production
     volumes:
       - ./app/.log/:/usr/src/app/.log
       - ./.cred:/usr/src/app/.cred
@@ -24,8 +23,11 @@ services:
       - RABBITMQ_USERNAME=guest
       - RABBITMQ_PASSWORD=guest
       - RABBITMQ_ROUTING_KEY=status
-      - RABBITMQ_EXCHANGE_NAME=pupymed
+      - QUEUE_SKLEARN_INPUT=sklearn-input-queue
+      - QUEUE_TRANSFORMERS_INPUT=transformers-input-queue
+      - QUEUE_STATUS_INPUT=session-status-queue
       - FIREBASE_CREDENTIALS=./.cred/pupymed-d7d68250c022.json
+      - ENVIRONMENT=SESSION-STATUS-SERVICE
     networks:
       - backend
   session-service:
@@ -40,7 +42,6 @@ services:
     networks:
       - backend
     working_dir: /usr/src/app
-    command: python3 ./server.py --production
     volumes:
       - ./app/.log/:/usr/src/app/.log
       - ./.cred:/usr/src/app/.cred
@@ -51,7 +52,10 @@ services:
       - RABBITMQ_PASSWORD=guest
       - RABBITMQ_ROUTING_KEY=status
       - RABBITMQ_EXCHANGE_NAME=pupymed
+      - QUEUE_SKLEARN_INPUT=sklearn-input-queue
+      - QUEUE_TRANSFORMERS_INPUT=transformers-input-queue
+      - QUEUE_STATUS_INPUT=session-status-queue
       - FIREBASE_CREDENTIALS=./.cred/pupymed-d7d68250c022.json
-
+      - ENVIRONMENT=SESSION-SERVICE
 networks:
   backend:
