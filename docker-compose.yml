@@ -12,11 +12,10 @@ services:
     build: "."
     image: session-status-service:latest
     container_name: session-status-service
-    depends_on: [rabbitmq, session-service]
+    depends_on: [rabbitmq]
     working_dir: /usr/src/app
     volumes:
-      - ./app/.log/:/usr/src/app/.log
-      - ./.cred:/usr/src/app/.cred
+      - ./.log/:/usr/src/app/.log:cached
     env_file:
       - rabbitmq-variables.env
       - firebase-variables.env
@@ -37,8 +36,7 @@ services:
       - backend
     working_dir: /usr/src/app
     volumes:
-      - ./app/.log/:/usr/src/app/.log
-      - ./.cred:/usr/src/app/.cred
+      - ./.log/:/usr/src/app/.log:cached
     env_file:
       - rabbitmq-variables.env
       - firebase-variables.env
