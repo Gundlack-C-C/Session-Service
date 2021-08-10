@@ -5,20 +5,31 @@ import logging
 import os
 import sys
 import argparse
+import json
 
 fire_connector = None
 
 
 def session_status_callback(ch, method, properties, body):
-    logging.info(" [x] Session Status Received %r" % body.decode())
-    status = {
-        "id": "Test",
-        "status": "Test",
-        "msg": f"Message Received: {body.decode()}"
-    }
-    fire_connector.update_status("test", status)
 
-    logging.info(" [x] Done")
+    logging.info(" [x] Session Status Received %r" % body.decode())
+    try:
+        status = json.loads(body)
+        _id = status.get('id', None)
+        _state = status.get('state', None)
+        _msg = status.get('msg', None)
+
+        assert _id != None, "Invalid Session Status Body! Missing field 'id'"
+        assert _state != None, "Invalid Session Status Body! Missing field 'state'"
+
+        if _msg == None:
+            status['msg'] = ''
+
+        fire_connector.update_status(_id, status)
+        logging.info(" [x] Session Status Database Updated")
+        logging.info(" [x] Done")
+    except Exception as e:
+        logging.error(f"Session Status Callback Failed! " + str(e))
 
 
 if __name__ == '__main__':
