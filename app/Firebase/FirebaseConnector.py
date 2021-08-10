@@ -1,10 +1,9 @@
-import firebase_admin
-from firebase_admin import credentials
 import os
 from werkzeug.exceptions import ServiceUnavailable
-from firebase_admin import firestore
-from datetime import datetime
-from datetime import timezone
+from datetime import datetime, timezone
+import firebase_admin
+from firebase_admin import credentials, firestore
+
 
 class FirebaseConnector():
     app = None
