@@ -34,12 +34,12 @@ class FirebaseConnector():
         doc_ref = self.db.collection('session_status').document(id).get()
         if doc_ref.exists:
             self.db.collection('session_status').document(id).update({
-                'array': firestore.ArrayUnion([status]),
+                'status': firestore.ArrayUnion([status]),
                 'changed': firestore.SERVER_TIMESTAMP
             })
         else:
             self.db.collection('session_status').document(id).set({
-                'array': firestore.ArrayUnion([status]),
+                'status': firestore.ArrayUnion([status]),
                 'changed': firestore.SERVER_TIMESTAMP,
                 'created': firestore.SERVER_TIMESTAMP
             })
