@@ -21,7 +21,6 @@ def Commit_Session():
     try:
         data = json.loads(request.data)
     except Exception as e:
-        logging.error("Invalid Input")
         raise BadRequest(f"Invalid Input! JSON format required! {e}") from e
 
     if not 'input' in data:

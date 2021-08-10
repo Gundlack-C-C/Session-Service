@@ -1,4 +1,3 @@
-import logging
 import uuid
 from werkzeug.exceptions import ServiceUnavailable, BadRequest
 from RabbitMQ.Sender import sendMessage
@@ -28,8 +27,6 @@ class SessionServer():
             sendMessage({"id": _id, "state": "NEW",
                          "msg": "New session commited to queue."}, routing_key='status')
         except Exception as e:
-            logging.error(e)
-            raise ServiceUnavailable(
-                f'RabbitMQ Service not available! Reason: {str(e)}') from e
+            raise ServiceUnavailable(f'RabbitMQ Service not available! Reason: {str(e)}') from e
 
         return _id
