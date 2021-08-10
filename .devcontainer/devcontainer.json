@@ -7,7 +7,7 @@
 		"../docker-compose.yml",
 		"docker-compose.extend.yml"
 	],
-	"service": "session-service",
+	"service": "session-status-service",
 	"workspaceFolder": "/usr/src/app",
 	"shutdownAction": "stopCompose",
 	// Set *default* container specific settings.json values on container create.
@@ -29,6 +29,7 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
+		"irongeek.vscode-env"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
