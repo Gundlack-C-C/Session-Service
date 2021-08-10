@@ -26,11 +26,6 @@
             "request": "launch",
             "program": "${cwd}/app/session-status-service-app.py",
             "console": "integratedTerminal",
-            "args": [
-                "--l",
-                "./.log/server_debug.log",
-                "--production",
-            ],
             "cwd": "${workspaceFolder}/app"
         }
     ]
