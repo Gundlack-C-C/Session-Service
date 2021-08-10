@@ -17,16 +17,10 @@ services:
     volumes:
       - ./app/.log/:/usr/src/app/.log
       - ./.cred:/usr/src/app/.cred
+    env_file:
+      - rabbitmq-variables.env
+      - firebase-variables.env
     environment:
-      - RABBITMQ_SERVICE_IP=session-queue
-      - RABBITMQ_SERVICE_PORT=5672
-      - RABBITMQ_USERNAME=guest
-      - RABBITMQ_PASSWORD=guest
-      - RABBITMQ_ROUTING_KEY=status
-      - QUEUE_SKLEARN_INPUT=sklearn-input-queue
-      - QUEUE_TRANSFORMERS_INPUT=transformers-input-queue
-      - QUEUE_STATUS_INPUT=session-status-queue
-      - FIREBASE_CREDENTIALS=./.cred/pupymed-d7d68250c022.json
       - ENVIRONMENT=SESSION-STATUS-SERVICE
     networks:
       - backend
@@ -45,17 +39,10 @@ services:
     volumes:
       - ./app/.log/:/usr/src/app/.log
       - ./.cred:/usr/src/app/.cred
+    env_file:
+      - rabbitmq-variables.env
+      - firebase-variables.env
     environment:
-      - RABBITMQ_SERVICE_IP=session-queue
-      - RABBITMQ_SERVICE_PORT=5672
-      - RABBITMQ_USERNAME=guest
-      - RABBITMQ_PASSWORD=guest
-      - RABBITMQ_ROUTING_KEY=status
-      - RABBITMQ_EXCHANGE_NAME=pupymed
-      - QUEUE_SKLEARN_INPUT=sklearn-input-queue
-      - QUEUE_TRANSFORMERS_INPUT=transformers-input-queue
-      - QUEUE_STATUS_INPUT=session-status-queue
-      - FIREBASE_CREDENTIALS=./.cred/pupymed-d7d68250c022.json
       - ENVIRONMENT=SESSION-SERVICE
 networks:
   backend:
