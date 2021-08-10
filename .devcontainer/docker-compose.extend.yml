@@ -1,7 +1,8 @@
 version: "3.9"
 
 services:
-  session-service:
+  session-status-service:
     volumes:
       - .:/usr/src/app:cached
-    command: /bin/sh -c "while sleep 1000; do :; done"
+    environment:
+      - ENVIRONMENT=DEV
