@@ -17,7 +17,10 @@ elif [ $ENVIRONMENT = "SESSION-STATUS-SERVICE" ]; then
 elif [ $ENVIRONMENT = "SESSION-SERVICE" ]; then
     echo "Start Session Status Service"
     python3 ./server.py --production
+elif [ $ENVIRONMENT = "DEV" ]; then
+    echo "Development Mode - Sleep to connect to container"
+    /bin/sh -c "while sleep 1000; do :; done"
 else
     echo "Start Server"
-    python3 ./server.py --production
+    python3 ./server.py
 fi
