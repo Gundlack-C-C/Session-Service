@@ -20,7 +20,7 @@ services:
       - rabbitmq-variables.env
       - firebase-variables.env
     environment:
-      - ENVIRONMENT=SESSION-STATUS-SERVICE
+      - MODE=SESSION-STATUS-SERVICE
     networks:
       - backend
   session-service:
@@ -41,6 +41,6 @@ services:
       - rabbitmq-variables.env
       - firebase-variables.env
     environment:
-      - ENVIRONMENT=SESSION-SERVICE
+      - MODE=SESSION-SERVICE
 networks:
   backend:
