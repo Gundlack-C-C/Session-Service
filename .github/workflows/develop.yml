@@ -32,8 +32,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      # Reload the deployment, which takes the last version of "latest"
       - name: Deploy Image in the Cluster
         uses: steebchen/kubectl@v2.0.0
-        with:
-          config: ${{ secrets.KUBE_CONFIG_DATA }}
-          command: rollout restart deployment/session-service-deployment -n ${{ secrets.NAMESPACE_DEV }} # Reload the deployment, which takes the last version of "latest"
+        with: 
+          config: ${{ secrets.KUBE_CONFIG_DATA }} 
+          command: rollout restart deployment/session-service-deployment -n ${{ secrets.NAMESPACE_DEV }} && rollout restart deployment/session-status-service-deployment -n ${{ secrets.NAMESPACE_DEV }} 
