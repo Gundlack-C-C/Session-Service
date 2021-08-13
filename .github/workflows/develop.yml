@@ -37,4 +37,4 @@ jobs:
         uses: steebchen/kubectl@v2.0.0
         with: 
           config: ${{ secrets.KUBE_CONFIG_DATA }} 
-          command: rollout restart deployment/session-service-deployment -n ${{ secrets.NAMESPACE_DEV }} && rollout restart deployment/session-status-service-deployment -n ${{ secrets.NAMESPACE_DEV }} 
+          command: rollout restart deployment/session-service-deployment -n ${{ secrets.NAMESPACE_DEV }} && kubectl rollout restart deployment/session-status-service-deployment -n ${{ secrets.NAMESPACE_DEV }} 
