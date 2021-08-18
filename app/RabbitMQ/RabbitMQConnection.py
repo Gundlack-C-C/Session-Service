@@ -12,7 +12,7 @@ class RabbitMQConnection(object):
             cls._instance = cls.__connect(cls)
         return cls._instance
 
-    def __connect(cls):
+    def connect(cls):
         IP = cls.__getEnvironmentVariable('RABBITMQ_SERVICE_IP')
         PORT = cls.__getEnvironmentVariable('RABBITMQ_SERVICE_PORT')
         username = cls.__getEnvironmentVariable('RABBITMQ_USERNAME')
