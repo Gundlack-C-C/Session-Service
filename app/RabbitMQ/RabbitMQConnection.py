@@ -7,12 +7,12 @@ class RabbitMQConnection(object):
     _instance = None
 
     def __new__(cls):
-        if cls._instance is None:
+        if cls._instance is None or cls._instance.is_closed():
             cls._instance = super(RabbitMQConnection, cls).__new__(cls)
             cls._instance = cls.__connect(cls)
         return cls._instance
 
-    def connect(cls):
+    def __connect(cls):
         IP = cls.__getEnvironmentVariable('RABBITMQ_SERVICE_IP')
         PORT = cls.__getEnvironmentVariable('RABBITMQ_SERVICE_PORT')
         username = cls.__getEnvironmentVariable('RABBITMQ_USERNAME')
