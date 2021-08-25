@@ -64,7 +64,7 @@ if __name__ == '__main__':
         fire_connector.update_status("test",
                                      {"id": "test", "status": "test", "msg": "Session-Service Started"})
 
-        routing_key = os.getenv('RABBITMQ_ROUTING_KEY')
+        routing_key = os.getenv('RABBITMQ_STATUS_ROUTING_KEY')
         queue = Configuration.ROUTING[routing_key]['QUEUE_NAME']
         
         listener_sklearn = Listener(routing_key=routing_key)
