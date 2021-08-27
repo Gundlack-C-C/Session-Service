@@ -5,4 +5,4 @@ services:
     volumes:
       - .:/usr/src/app:cached
     environment:
-      - ENVIRONMENT=DEV
+      - MODE=DEV
