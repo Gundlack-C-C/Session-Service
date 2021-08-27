@@ -23,10 +23,10 @@ def Commit_Session():
     except Exception as e:
         raise BadRequest(f"Invalid Input! JSON format required! {e}") from e
 
-    if not 'input' in data:
+    input = data.get('input', None)
+    if input == None:
         raise BadRequest("Missing field: 'input'")
 
-    input = data.get('input', None)
     mode = data.get('target', 'sklearn')
 
     session_id = server.start_session(input, mode)
