@@ -16,9 +16,9 @@
 - RABBITMQ_USERNAME : RabbitMQ account username 
 - RABBITMQ_PASSWORD=guest: RabbitMQ account username
 - RABBITMQ_EXCHANGE_NAME: Name of the exchange
-- RABBITMQ_TRANSFORMERS_QUEUE_INPUT: Name of the sklearn queue
+- RABBITMQ_TRANSFORMERS_QUEUE: Name of the sklearn queue
 - RABBITMQ_TRANSFORMERS_ROUTING_KEY: Routing key for transformers queue
-- RABBITMQ_SKLEARN_QUEUE_INPUT: Name of the sklearn queue
+- RABBITMQ_SKLEARN_QUEUE: Name of the sklearn queue
 - RABBITMQ_SKLEARN_ROUTING_KEY:  Routing key for sklearn queue
-- RABBITMQ_STATUS_QUEUE_INPUT:  Name of the status queue
+- RABBITMQ_STATUS_QUEUE:  Name of the status queue
 - RABBITMQ_STATUS_ROUTING_KEY :  Routing key for status queue
