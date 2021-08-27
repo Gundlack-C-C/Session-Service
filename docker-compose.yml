@@ -9,10 +9,9 @@ services:
     networks:
       - backend
   session-status-service:
-    build: "."
-    image: session-status-service:latest
+    image: session-service:latest
     container_name: session-status-service
-    depends_on: [rabbitmq]
+    depends_on: [rabbitmq, session-service]
     working_dir: /usr/src/app
     volumes:
       - ./.log/:/usr/src/app/.log:cached
