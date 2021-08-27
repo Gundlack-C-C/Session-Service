@@ -22,6 +22,7 @@ services:
       - MODE=SESSION-STATUS-SERVICE
     networks:
       - backend
+    restart: always
   session-service:
     build: "."
     image: session-service:latest
@@ -41,5 +42,6 @@ services:
       - firebase-variables.env
     environment:
       - MODE=SESSION-SERVICE
+    restart: always
 networks:
   backend:
