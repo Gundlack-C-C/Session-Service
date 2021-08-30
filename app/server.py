@@ -5,6 +5,7 @@ import sys
 import os
 import json
 from werkzeug.exceptions import BadRequest
+from werkzeug.wrappers.response import Response
 import logging
 import argparse
 
@@ -23,9 +24,11 @@ def Commit_Session():
     except Exception as e:
         raise BadRequest(f"Invalid Input! JSON format required! {e}") from e
 
-    input = data.get('input', None)
-    if input == None:
-        raise BadRequest("Missing field: 'input'")
+    try:
+        input = data.get('input', None)
+        assert input != None; "Missing field: 'input'"
+    except Exception as e:
+         raise BadRequest(f"Invalid Input! Missing Field! {e}") from e
 
     mode = data.get('target', 'sklearn')
 
