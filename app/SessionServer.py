@@ -17,10 +17,10 @@ def validateInput(input):
 class SessionServer():
     def __init__(self):
         self.status_routing_key = os.getenv("RABBITMQ_STATUS_ROUTING_KEY")
-        assert self.status_routing_key != None, f"Missing Environemnt Variable: '{RABBITMQ_STATUS_ROUTING_KEY}'"
+        assert self.status_routing_key != None, f"Missing Environemnt Variable: 'RABBITMQ_STATUS_ROUTING_KEY'"
 
     def start_session(self, input, mode, _id=None):
-        try: 
+        try:
             validateInput(input)
         except Exception as e:
             raise BadRequest("Invalid Input! " + str(e)) from e
